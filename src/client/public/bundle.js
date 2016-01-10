@@ -68,13 +68,52 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
 	var inputStyle = {
-	    border: 'none',
-	    boxShadow: 'inset 0 0 3px #999',
+	    border: '1px solid #999',
 	    padding: '5px'
 	};
 	
-	var ShopList = function (_React$Component) {
-	    _inherits(ShopList, _React$Component);
+	var Price = function (_React$Component) {
+	    _inherits(Price, _React$Component);
+	
+	    function Price(props) {
+	        _classCallCheck(this, Price);
+	
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Price).call(this, props));
+	
+	        _this.state = { price: null };
+	        _this.onChange = _this.onChange.bind(_this);
+	        return _this;
+	    }
+	
+	    _createClass(Price, [{
+	        key: 'onChange',
+	        value: function onChange(e) {
+	            this.setState({ price: e.target.value });
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement('input', { className: 'item-price', type: 'text', onChange: this.onChange, value: this.state.price });
+	        }
+	    }]);
+	
+	    return Price;
+	}(_react2.default.Component);
+	
+	var Calc = function (_React$Component2) {
+	    _inherits(Calc, _React$Component2);
+	
+	    function Calc() {
+	        _classCallCheck(this, Calc);
+	
+	        return _possibleConstructorReturn(this, Object.getPrototypeOf(Calc).apply(this, arguments));
+	    }
+	
+	    return Calc;
+	}(_react2.default.Component);
+	
+	var ShopList = function (_React$Component3) {
+	    _inherits(ShopList, _React$Component3);
 	
 	    function ShopList() {
 	        _classCallCheck(this, ShopList);
@@ -95,7 +134,7 @@
 	                        { key: item.id },
 	                        item.text
 	                    ),
-	                    _react2.default.createElement('input', { className: 'item-price', type: 'text' }),
+	                    _react2.default.createElement(Price, null),
 	                    _react2.default.createElement(
 	                        'label',
 	                        { className: 'price' },
@@ -114,18 +153,18 @@
 	    return ShopList;
 	}(_react2.default.Component);
 	
-	var ShopApp = function (_React$Component2) {
-	    _inherits(ShopApp, _React$Component2);
+	var ShopApp = function (_React$Component4) {
+	    _inherits(ShopApp, _React$Component4);
 	
 	    function ShopApp(props) {
 	        _classCallCheck(this, ShopApp);
 	
-	        var _this2 = _possibleConstructorReturn(this, Object.getPrototypeOf(ShopApp).call(this, props));
+	        var _this4 = _possibleConstructorReturn(this, Object.getPrototypeOf(ShopApp).call(this, props));
 	
-	        _this2.state = { items: [], text: '' };
-	        _this2.onChange = _this2.onChange.bind(_this2);
-	        _this2.handleSubmit = _this2.handleSubmit.bind(_this2);
-	        return _this2;
+	        _this4.state = { items: [], text: '' };
+	        _this4.onChange = _this4.onChange.bind(_this4);
+	        _this4.handleSubmit = _this4.handleSubmit.bind(_this4);
+	        return _this4;
 	    }
 	
 	    _createClass(ShopApp, [{
@@ -161,7 +200,8 @@
 	                    'form',
 	                    { onSubmit: this.handleSubmit },
 	                    _react2.default.createElement('input', { style: inputStyle, onChange: this.onChange, value: this.state.text })
-	                )
+	                ),
+	                _react2.default.createElement('div', { id: 'total' })
 	            );
 	        }
 	    }]);

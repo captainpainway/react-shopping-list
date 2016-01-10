@@ -2,9 +2,28 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 var inputStyle = {
-    border: 'none',
-    boxShadow: 'inset 0 0 3px #999',
+    border: '1px solid #999',
     padding: '5px'
+}
+
+class Price extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {price: null};
+        this.onChange = this.onChange.bind(this);
+    }
+    onChange(e) {
+        this.setState({price: e.target.value});
+    }  
+    render() {
+        return (
+            <input className='item-price' type='text' onChange={this.onChange} value={this.state.price}></input>
+        );
+    }
+}
+
+class Calc extends React.Component {
+
 }
 
 class ShopList extends React.Component {
@@ -12,7 +31,7 @@ class ShopList extends React.Component {
         let createItem = function(item) {
             return <li><input type='checkbox'></input>
                 <label key={item.id}>{item.text}</label>
-                <input className='item-price' type='text'></input>
+                <Price />
                 <label className='price'>$</label></li>;
         };
         return <ul>{this.props.items.map(createItem)}</ul>;
@@ -46,6 +65,7 @@ class ShopApp extends React.Component {
                     <input style={inputStyle} onChange={this.onChange} value={this.state.text} />
                     {/*<button>{'Add'}</button>*/}
                 </form>
+                <div id='total'></div>
             </div>
         );
     }
